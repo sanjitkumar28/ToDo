@@ -1,23 +1,20 @@
 var taskObjects;
-// showAllTask();
-inputTask=document.getElementById('inputTask');
-console.log(inputTask);
-addTask=document.getElementById('addTask');
-console.log(addTask);
+showAllTask();
+let inputTask=document.getElementById('inputTask');
+let addTask=document.getElementById('addTask');
 
 addTask.addEventListener('click',()=>{
-    inputValue=inputTask.value;
-    let webtask =localStorage.getItem("localTask");
-    console.log(inputValue);
+    let inputValue=inputTask.value;
+    let getLocalTask =localStorage.getItem("localTask");
     if(inputValue.trim()!=0){
-        if(webtask==null)
+        if(getLocalTask==null)
         {
              taskObjects=[]
         }
        else
        {
-        taskObjects=JSON.parse(webtask);
-        taskObjects.push({'taskName':inputValue,completed:true})
+        taskObjects=JSON.parse(getLocalTask);
+        taskObjects.push({'taskName':inputValue})
        }
        localStorage.setItem("localTask", JSON.stringify(taskObjects));
        inputTask.value='';
@@ -26,11 +23,13 @@ addTask.addEventListener('click',()=>{
 })
 
 function showAllTask(){
-    // const div = document.createElement("div");
-    // div.classList.add("to-do-output");
-    // const tbl=document.createElement("table")
-    // tbl.classList.add('addTaskItem');
-    // div.appendChild(tbl);
+    let getLocalTask=localStorage.getItem("localTask");
+    if(getLocalTask==null){
+        taskObjects=[];
+    }
+    else{
+        taskObjects=JSON.parse(getLocalTask);
+    }
       let html='';
       let addTaskItem=document.getElementById('addTaskItem');
       taskObjects.forEach((item,index)=>{
@@ -38,17 +37,16 @@ function showAllTask(){
           <td>${index+1}</td>
           <td>${item.taskName}</td>
           <td><button type="button" onclick="editTask(${index})">Edit</button></td>
-          <td><button type="button" onclick="deleteItem(${index})">Delete</button></td>
+          <td><button type="button" onclick="deleteToDoItems(${index})">Delete</button></td>
           </tr>`
       })
       addTaskItem.innerHTML=html;
 }
 
 
-function deleteItem(index){
-    console.log('delete is called');
-    let webtask=localStorage.getItem("localTask");
-    taskObjects=JSON.parse(webtask);
+function deleteToDoItems(index){
+    let getLocalTask=localStorage.getItem("localTask");
+    taskObjects=JSON.parse(getLocalTask);
    console.log(taskObjects);
     taskObjects.splice(index,1);
     localStorage.setItem("localTask",JSON.stringify(taskObjects));
@@ -56,14 +54,13 @@ function deleteItem(index){
 }
 
 function editTask(index){
-    let saveforedit = document.getElementById("saveforedit");
+    let saveForEdit = document.getElementById("saveforedit");
     let addtaskbtn = document.getElementById("addTask");
     console.log(addtaskbtn);
     let savetaskbtn = document.getElementById("savetaskbtn");
-    saveforedit.value = index;
-    let webtask = localStorage.getItem("localtask");
-    let taskObj = JSON.parse(webtask); 
-    
+    saveForEdit.value = index;
+    let getLocalTask = localStorage.getItem("localtask");
+    let taskObj = JSON.parse(getLocalTask); 
     inputTask.value= taskObjects[index]['taskName'];
     addtaskbtn.style.display="none";
     savetaskbtn.style.display="block";
@@ -71,15 +68,15 @@ function editTask(index){
 let savetaskbtn = document.getElementById("savetaskbtn");
 savetaskbtn.addEventListener("click", function(){
     let addtaskbtn = document.getElementById("addTask");
-    let webtask = localStorage.getItem("localTask");
-     taskObjects = JSON.parse(webtask); 
+    let getLocalTask = localStorage.getItem("localTask");
+     taskObjects = JSON.parse(getLocalTask); 
      console.log(taskObjects);
-    let saveforedit = document.getElementById("saveforedit").value;
-    console.log(saveforedit);
+    let saveForEdit = document.getElementById("saveforedit").value;
+
 
     // for (keys in taskObjects[saveforedit]) {
     //     if(keys == 'task_name'){
-            taskObjects[saveforedit].taskName = inputTask.value;
+            taskObjects[saveForEdit].taskName = inputTask.value;
     //     }
     // }
     savetaskbtn.style.display="none";
@@ -94,13 +91,13 @@ console.log(clearAll);
 clearAll.addEventListener("click", function(){
     let savetaskbtn = document.getElementById("savetaskbtn");
     let inputTask = document.getElementById("inputTask");
-    let webtask = localStorage.getItem("localTask");
-     taskObjects = JSON.parse(webtask);
-    if(webtask == null){
+    let getLocalTask = localStorage.getItem("localTask");
+     taskObjects = JSON.parse(getLocalTask);
+    if(getLocalTask == null){
         taskObjects = [];
     }
     else{
-        taskObjects = JSON.parse(webtask);
+        taskObjects = JSON.parse(getLocalTask);
         taskObjects = [];
     }
     console.log(taskObjects);
