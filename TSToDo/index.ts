@@ -1,10 +1,11 @@
-var taskObjects;
+// export {}
+var taskObjects: { taskName: any; }[];
 showAllTask();
-let inputTask=document.getElementById('inputTask');
-let addTask=document.getElementById('addTask');
+let inputtask:any=document.getElementById('inputTask');
+var addtask:any=document.getElementById('addTask');
 
-addTask.addEventListener('click',()=>{
-    let inputValue=inputTask.value;
+addtask.addEventListener('click',()=>{
+    let inputValue:any=inputtask.value;
     let getLocalTask =localStorage.getItem("localTask");
     if(inputValue.trim()!=0){
         if(getLocalTask==null)
@@ -17,7 +18,7 @@ addTask.addEventListener('click',()=>{
         taskObjects.push({'taskName':inputValue})
        }
        localStorage.setItem("localTask", JSON.stringify(taskObjects));
-       inputTask.value='';
+       inputtask.value='';
     }
     showAllTask();
 })
@@ -31,7 +32,7 @@ function showAllTask(){
         taskObjects=JSON.parse(getLocalTask);
     }
       let html='';
-      let addTaskItem=document.getElementById('addTaskItem');
+      let addTaskItem:any=document.getElementById('addTaskItem');
       taskObjects.forEach((item,index)=>{
           html+=`<tr>
           <td>${index+1}</td>
@@ -44,50 +45,58 @@ function showAllTask(){
 }
 
 
-function deleteToDoItems(index){
+function deleteToDoItems(index:number){
     let getLocalTask=localStorage.getItem("localTask");
-    taskObjects=JSON.parse(getLocalTask);
+    taskObjects=JSON.parse(getLocalTask?getLocalTask: '');
    console.log(taskObjects);
     taskObjects.splice(index,1);
     localStorage.setItem("localTask",JSON.stringify(taskObjects));
     showAllTask();
 }
 
-function editTask(index){
-    let saveForEdit = document.getElementById("saveforedit");
-    let addtaskbtn = document.getElementById("addTask");
+function editTask(index: number){
+    let saveForEdit:any = document.getElementById("saveforedit");
+    let addtaskbtn:any = document.getElementById("addTask");
     console.log(addtaskbtn);
-    let savetaskbtn = document.getElementById("savetaskbtn");
+    let savetaskbtn:any = document.getElementById("savetaskbtn");
     saveForEdit.value = index;
-    let getLocalTask = localStorage.getItem("localtask");
-    let taskObj = JSON.parse(getLocalTask); 
-    inputTask.value= taskObjects[index]['taskName'];
+    let getLocalTask:any = localStorage.getItem("localTask");
+    let taskObjects:any = JSON.parse(getLocalTask?getLocalTask: ''); 
+    console.log(taskObjects);
+    console.log(inputtask);
+    
+    
+    inputtask.value= taskObjects[index]['taskName'];
     addtaskbtn.style.display="none";
-    savetaskbtn.style.display="inline";
+    savetaskbtn.style.display="block";
 }
-let savetaskbtn = document.getElementById("savetaskbtn");
-savetaskbtn.addEventListener("click", function(){
-    let addtaskbtn = document.getElementById("addTask");
+let saveTaskbtn:any = document.getElementById("savetaskbtn");
+saveTaskbtn.addEventListener("click", function(){
+    let addtaskbtn: any = document.getElementById("addTask");
     let getLocalTask = localStorage.getItem("localTask");
-     taskObjects = JSON.parse(getLocalTask); 
+     taskObjects = JSON.parse(getLocalTask?getLocalTask: ''); 
      console.log(taskObjects);
-    let saveForEdit = document.getElementById("saveforedit").value;
-    taskObjects[saveForEdit].taskName = inputTask.value;
+    let saveForEdit:any = document.getElementById("saveforedit");
+    let saveindex:number=saveForEdit.value;
+    console.log(saveindex, "es")
+    console.log("inputtask value="+inputtask.value);
+    
+    taskObjects[saveindex]['taskName'] = inputtask.value;
 
-    savetaskbtn.style.display="none";
+    saveTaskbtn.style.display="none";
     addtaskbtn.style.display="block";
     localStorage.setItem("localTask", JSON.stringify(taskObjects));
-    inputTask.value='';
+    inputtask.value='';
     showAllTask();
 });
 
-let clearAll = document.getElementById("clearAll");
-console.log(clearAll);
-clearAll.addEventListener("click", function(){
-    let savetaskbtn = document.getElementById("savetaskbtn");
+let clearall:any = document.getElementById("clearAll");
+console.log(clearall);
+clearall.addEventListener("click", function(){
+    let savetaskbtn:any = document.getElementById("savetaskbtn");
     let addtaskbtn = document.getElementById("addTask");
     let getLocalTask = localStorage.getItem("localTask");
-     taskObjects = JSON.parse(getLocalTask);
+     taskObjects = JSON.parse(getLocalTask?getLocalTask: '');
     if(getLocalTask == null){
         taskObjects = [];
     }
@@ -97,9 +106,9 @@ clearAll.addEventListener("click", function(){
     }
     console.log(taskObjects);
     savetaskbtn.style.display="none";
-    addTask.style.display="block";
+    addtask.style.display="block";
     localStorage.setItem("localTask", JSON.stringify(taskObjects));
-    inputTask.value='';
+    inputtask.value='';
     showAllTask();
 
 })

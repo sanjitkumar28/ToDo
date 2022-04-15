@@ -7,7 +7,7 @@ background-image: linear-gradient(#4CA1AF,#C4E0E5);
   font-size: 50px;
   margin-bottom: 4vh;
 }
-.todo-inner {
+.mydoto{
   width: 70%;
   float: left;
   padding: 40px;
@@ -15,96 +15,19 @@ background-image: linear-gradient(#4CA1AF,#C4E0E5);
   box-shadow: 0px 0px 10px #c1c1c1;
   background: #fff;
 }
-.todo-inner input{
+.mydoto input{
    height:56px;
    margin-top: 2px;
    font-size: 25px;
 }
-.container1{
-  margin-top: 5vh;
-  background-color: white;
-  width:70vw;
-  height:100px;
-  margin-left:15vw;
-  text-align: center;
-  font-family: 'Times New Roman', Times, serif;
- 
-}
-.add-elements{
-  margin-top:12px;
-  height: 90%;
- border: 1px solid black;  
-}
-input{
-  padding: 6px 4px;
-  width: 70%;
-  margin-top:18px;
-  font-size: 25px;
-  height: 40px;
-  text-align: center;
-}
-button{
-  padding: 7px 14px;
-  height: 57px;
-  font-size: 20px;
-  margin-left:12px;
-  background-color: #00b0ff;
-  border: none;
-  border-radius: 4px;
-  color: white;
-}
-
-.to-do-output{
-    /* margin-top: 5vh;
-    background-color: white; */
-    width:70vw;
-    height:auto;
-    margin-top: 10px;
-    height:50px;
-    /* margin-left:15vw;
-    text-align: center; */
-    font-family: 'Times New Roman', Times, serif;
-   
-}
-#indexs{
-  margin:10px;
-}
-.to-do-output{
-  box-shadow: 0px 0px 10px #c1c1c1;
-}
-table{
+tr{
   font-size: 30px;
-  word-spacing: 5px;
 }
-/* .to-do-output table tr{
-  border-bottom: 1px solid black;
-}  */
-
-
-
-
-
-
-
-/* section.todo-outer {
-  width: 100%;
-  float: left;
-  padding: 30px 0;
+tr button{
+  background-color:#4CA1AF;
 }
-section.todo-outer h1 {
-  font-size: 40px;
-  margin-bottom: 20px;
-}
-.todo-inner {
-  width: 100%;
-  float: left;
-  padding: 40px;
-  box-shadow: 0px 0px 10px #c1c1c1;
-  background: #fff;
-}
-table tr td button {
-  background: no-repeat;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-} */
+
+
+
+
+
